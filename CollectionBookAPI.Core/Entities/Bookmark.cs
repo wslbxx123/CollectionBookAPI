@@ -22,5 +22,8 @@ namespace CollectionBookAPI.Core
 
         [BsonElement("tag")]
         public string Tag { get; set; }
+
+        [BsonElement("description")]
+        public string Description { get; set; }
     }
 }

@@ -17,6 +17,12 @@ namespace CollectionBookAPI.Infrastructure.Repository
             _bookmarks = database.GetCollection<Bookmark>(settings.BookmarkCollectionName);
         }
 
+        public Bookmark AddBookmark(Bookmark bookmark)
+        {
+            _bookmarks.InsertOne(bookmark);
+            return bookmark;
+        }
+
         public List<Bookmark> GetBookmarks() =>
             _bookmarks.Find(bookmark => true).ToList();
     }

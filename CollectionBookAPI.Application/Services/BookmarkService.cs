@@ -15,6 +15,9 @@ namespace CollectionBookAPI.Application.Services
             _bookmarkRepository = bookmarkRepository;
         }
 
+        public Bookmark AddBookmark(Bookmark bookmark) =>
+            _bookmarkRepository.AddBookmark(bookmark);
+
         public List<Bookmark> GetBookmarks() =>
             _bookmarkRepository.GetBookmarks();
     }

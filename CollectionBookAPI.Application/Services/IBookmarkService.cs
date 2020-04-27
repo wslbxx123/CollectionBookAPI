@@ -7,5 +7,6 @@ namespace CollectionBookAPI.Application.Services
     public interface IBookmarkService
     {
         List<Bookmark> GetBookmarks();
+        Bookmark AddBookmark(Bookmark bookmark);
     }
 }

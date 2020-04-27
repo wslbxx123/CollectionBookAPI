@@ -8,5 +8,6 @@ namespace CollectionBookAPI.Infrastructure.Repository
     public interface IBookmarkRepository
     {
         List<Bookmark> GetBookmarks();
+        Bookmark AddBookmark(Bookmark bookmark);
     }
 }
