@@ -17,6 +17,7 @@ namespace CollectionBookAPI.Core
         public string Link { get; set; }
 
         [BsonElement("owner")]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string Owner { get; set; }
 
         [BsonElement("tag")]

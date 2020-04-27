@@ -1,8 +1,0 @@
-C:\Users\Shelley_Xiang\Documents\Workspace\CollectionBookAPI\CollectionBookAPI.Core\bin\Debug\netcoreapp3.1\CollectionBookAPI.Core.deps.json
-C:\Users\Shelley_Xiang\Documents\Workspace\CollectionBookAPI\CollectionBookAPI.Core\bin\Debug\netcoreapp3.1\CollectionBookAPI.Core.dll
-C:\Users\Shelley_Xiang\Documents\Workspace\CollectionBookAPI\CollectionBookAPI.Core\obj\Debug\netcoreapp3.1\CollectionBookAPI.Core.AssemblyInfoInputs.cache
-C:\Users\Shelley_Xiang\Documents\Workspace\CollectionBookAPI\CollectionBookAPI.Core\obj\Debug\netcoreapp3.1\CollectionBookAPI.Core.AssemblyInfo.cs
-C:\Users\Shelley_Xiang\Documents\Workspace\CollectionBookAPI\CollectionBookAPI.Core\bin\Debug\netcoreapp3.1\CollectionBookAPI.Core.pdb
-C:\Users\Shelley_Xiang\Documents\Workspace\CollectionBookAPI\CollectionBookAPI.Core\obj\Debug\netcoreapp3.1\CollectionBookAPI.Core.csprojAssemblyReference.cache
-C:\Users\Shelley_Xiang\Documents\Workspace\CollectionBookAPI\CollectionBookAPI.Core\obj\Debug\netcoreapp3.1\CollectionBookAPI.Core.dll
-C:\Users\Shelley_Xiang\Documents\Workspace\CollectionBookAPI\CollectionBookAPI.Core\obj\Debug\netcoreapp3.1\CollectionBookAPI.Core.pdb
