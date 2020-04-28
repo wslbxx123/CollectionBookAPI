@@ -1,6 +1,7 @@
 ﻿using CollectionBookAPI.Core;
 using CollectionBookAPI.Core.Settings;
 using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 
 namespace CollectionBookAPI.Infrastructure.Repository
@@ -19,11 +20,20 @@ namespace CollectionBookAPI.Infrastructure.Repository
 
         public Bookmark AddBookmark(Bookmark bookmark)
         {
+            bookmark.DateUpdated = DateTime.Now;
+
+            // TODO: Get the user ID after authorization.
+            bookmark.Owner = "5e97db3c6efef62c58370e5e";
+
             _bookmarks.InsertOne(bookmark);
             return bookmark;
         }
 
+        public void DeleteBookmark(string id) =>
+            _bookmarks.DeleteOne(bookmark => bookmark.Id == id);
+
         public List<Bookmark> GetBookmarks() =>
-            _bookmarks.Find(bookmark => true).ToList();
+            _bookmarks.Find(bookmark => true)
+            .SortByDescending(bookmark => bookmark.DateUpdated).ToList();
     }
 }

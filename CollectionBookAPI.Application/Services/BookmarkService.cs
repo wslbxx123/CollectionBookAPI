@@ -18,6 +18,9 @@ namespace CollectionBookAPI.Application.Services
         public Bookmark AddBookmark(Bookmark bookmark) =>
             _bookmarkRepository.AddBookmark(bookmark);
 
+        public void DeleteBookmark(string id) =>
+            _bookmarkRepository.DeleteBookmark(id);
+
         public List<Bookmark> GetBookmarks() =>
             _bookmarkRepository.GetBookmarks();
     }

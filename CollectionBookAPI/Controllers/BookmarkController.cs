@@ -20,7 +20,6 @@ namespace CollectionBookAPI.Controllers
         }
 
         [HttpGet("[action]")]
-        // GET: Bookmark
         public IActionResult GetBookmarks()
         {
             try
@@ -42,6 +41,20 @@ namespace CollectionBookAPI.Controllers
             {
                 var bookmarks = _service.AddBookmark(bookmark);
                 return Ok(bookmarks);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("DeleteBookmark/{id}")]
+        public IActionResult DeleteBookmark(string id)
+        {
+            try
+            {
+                _service.DeleteBookmark(id);
+                return Ok();
             }
             catch (Exception ex)
             {

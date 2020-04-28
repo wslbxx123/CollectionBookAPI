@@ -8,5 +8,6 @@ namespace CollectionBookAPI.Application.Services
     {
         List<Bookmark> GetBookmarks();
         Bookmark AddBookmark(Bookmark bookmark);
+        void DeleteBookmark(string id);
     }
 }
