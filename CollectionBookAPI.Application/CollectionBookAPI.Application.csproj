@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CollectionBookAPI.Core\CollectionBookAPI.Core.csproj" />
     <ProjectReference Include="..\CollectionBookAPI.Infrastructure\CollectionBookAPI.Infrastructure.csproj" />
   </ItemGroup>

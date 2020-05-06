@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using CollectionBookAPI.Application.Services;
 using CollectionBookAPI.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CollectionBookAPI.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     public class BookmarkController : Controller
     {
         private IBookmarkService _service;

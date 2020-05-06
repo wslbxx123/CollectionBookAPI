@@ -39,6 +39,7 @@ namespace CollectionBookAPI.Infrastructure.Repository
         public void UpdateBookmark(string id, Bookmark bookmark)
         {
             bookmark.Id = id;
+            bookmark.DateUpdated = DateTime.Now;
             _bookmarks.ReplaceOne(bookmark => bookmark.Id == id, bookmark);
         }
     }
