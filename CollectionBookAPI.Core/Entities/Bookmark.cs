@@ -28,5 +28,14 @@ namespace CollectionBookAPI.Core
 
         [BsonElement("dateUpdated")]
         public DateTime DateUpdated { get; set; }
+
+        [BsonIgnore]
+        public string Key
+        {
+            get
+            {
+                return Id;
+            }
+        }
     }
 }

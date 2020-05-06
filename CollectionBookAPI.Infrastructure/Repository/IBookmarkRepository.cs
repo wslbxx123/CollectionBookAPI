@@ -10,5 +10,6 @@ namespace CollectionBookAPI.Infrastructure.Repository
         List<Bookmark> GetBookmarks();
         Bookmark AddBookmark(Bookmark bookmark);
         void DeleteBookmark(string id);
+        void UpdateBookmark(string id, Bookmark bookmark);
     }
 }

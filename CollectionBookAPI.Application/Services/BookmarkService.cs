@@ -23,5 +23,8 @@ namespace CollectionBookAPI.Application.Services
 
         public List<Bookmark> GetBookmarks() =>
             _bookmarkRepository.GetBookmarks();
+
+        public void UpdateBookmark(string id, Bookmark bookmark) =>
+            _bookmarkRepository.UpdateBookmark(id, bookmark);
     }
 }

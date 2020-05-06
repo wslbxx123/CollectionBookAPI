@@ -35,5 +35,11 @@ namespace CollectionBookAPI.Infrastructure.Repository
         public List<Bookmark> GetBookmarks() =>
             _bookmarks.Find(bookmark => true)
             .SortByDescending(bookmark => bookmark.DateUpdated).ToList();
+
+        public void UpdateBookmark(string id, Bookmark bookmark)
+        {
+            bookmark.Id = id;
+            _bookmarks.ReplaceOne(bookmark => bookmark.Id == id, bookmark);
+        }
     }
 }

@@ -61,5 +61,19 @@ namespace CollectionBookAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPut("UpdateBookmark/{id}")]
+        public IActionResult UpdateBookmark(string id, [FromBody] Bookmark bookmark)
+        {
+            try
+            {
+                _service.UpdateBookmark(id, bookmark);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
