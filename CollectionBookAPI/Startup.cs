@@ -1,20 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using CollectionBookAPI.Application.Services;
 using CollectionBookAPI.Core.Settings;
 using CollectionBookAPI.Infrastructure.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -34,20 +27,26 @@ namespace CollectionBookAPI
         {
             services.AddControllers();
 
-            services.Configure<BookmarkDatabaseSettings>(
-                Configuration.GetSection(nameof(BookmarkDatabaseSettings)));
+            services.Configure<DatabaseSettings>(
+                Configuration.GetSection(nameof(DatabaseSettings)));
             services.Configure<AppSettings>(
                 Configuration.GetSection(nameof(AppSettings)));
 
-            services.AddSingleton<IBookmarkDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<BookmarkDatabaseSettings>>().Value);
+            services.AddSingleton<IDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
             services.AddSingleton<IAppSettings>(sp =>
                 sp.GetRequiredService<IOptions<AppSettings>>().Value);
 
             services.AddTransient<IBookmarkService, BookmarkService>();
             services.AddTransient<IBookmarkRepository, BookmarkRepository>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUserRepository, UserRepository>();
 
+            ConfigureJWT(services);
+        }
+
+        private void ConfigureJWT(IServiceCollection services)
+        {
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
 
@@ -80,17 +79,9 @@ namespace CollectionBookAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
-            app.UseCors(x => x
-               .AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader());
-
             app.UseAuthorization();
-            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

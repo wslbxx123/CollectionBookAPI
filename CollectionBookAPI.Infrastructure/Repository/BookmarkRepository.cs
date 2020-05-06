@@ -10,7 +10,7 @@ namespace CollectionBookAPI.Infrastructure.Repository
     {
         private readonly IMongoCollection<Bookmark> _bookmarks;
 
-        public BookmarkRepository(IBookmarkDatabaseSettings settings)
+        public BookmarkRepository(IDatabaseSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
