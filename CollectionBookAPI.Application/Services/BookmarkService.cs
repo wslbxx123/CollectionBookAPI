@@ -15,16 +15,16 @@ namespace CollectionBookAPI.Application.Services
             _bookmarkRepository = bookmarkRepository;
         }
 
-        public Bookmark AddBookmark(Bookmark bookmark) =>
-            _bookmarkRepository.AddBookmark(bookmark);
+        public Bookmark AddBookmark(string userId, Bookmark bookmark) =>
+            _bookmarkRepository.AddBookmark(userId, bookmark);
 
-        public void DeleteBookmark(string id) =>
-            _bookmarkRepository.DeleteBookmark(id);
+        public void DeleteBookmark(string userId, string bookmarkId) =>
+            _bookmarkRepository.DeleteBookmark(userId, bookmarkId);
 
-        public List<Bookmark> GetBookmarks() =>
-            _bookmarkRepository.GetBookmarks();
+        public List<Bookmark> GetBookmarks(string userId, DateTime beginTime, int num) =>
+            _bookmarkRepository.GetBookmarks(userId, beginTime, num);
 
-        public void UpdateBookmark(string id, Bookmark bookmark) =>
-            _bookmarkRepository.UpdateBookmark(id, bookmark);
+        public void UpdateBookmark(string userId, string bookmarkId, Bookmark bookmark) =>
+            _bookmarkRepository.UpdateBookmark(userId, bookmarkId, bookmark);
     }
 }
