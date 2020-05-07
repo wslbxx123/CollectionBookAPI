@@ -6,9 +6,9 @@ namespace CollectionBookAPI.Application.Services
 {
     public interface IBookmarkService
     {
-        List<Bookmark> GetBookmarks();
-        Bookmark AddBookmark(Bookmark bookmark);
-        void DeleteBookmark(string id);
-        void UpdateBookmark(string id, Bookmark bookmark);
+        List<Bookmark> GetBookmarks(string userId, DateTime beginTime, int num);
+        Bookmark AddBookmark(string userId, Bookmark bookmark);
+        void DeleteBookmark(string userId, string bookmarkId);
+        void UpdateBookmark(string userId, string bookmarkId, Bookmark bookmark);
     }
 }

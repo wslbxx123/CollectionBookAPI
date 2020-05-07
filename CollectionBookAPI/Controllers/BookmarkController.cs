@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using CollectionBookAPI.Application.Services;
 using CollectionBookAPI.Core;
@@ -21,12 +22,13 @@ namespace CollectionBookAPI.Controllers
             this._service = service;
         }
 
-        [HttpGet("[action]")]
-        public IActionResult GetBookmarks()
+        [HttpGet("GetBookmarks")]
+        public IActionResult GetBookmarks(DateTime? beginTime, int num = 10)
         {
             try
             {
-                var bookmarks = _service.GetBookmarks();
+                var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                var bookmarks = _service.GetBookmarks(userId, beginTime == null ? DateTime.MaxValue : (DateTime)beginTime, num);
                 return Ok(bookmarks);
             }
             catch (Exception ex)
@@ -41,7 +43,8 @@ namespace CollectionBookAPI.Controllers
         {
             try
             {
-                var bookmarks = _service.AddBookmark(bookmark);
+                var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                var bookmarks = _service.AddBookmark(userId, bookmark);
                 return Ok(bookmarks);
             }
             catch (Exception ex)
@@ -55,7 +58,8 @@ namespace CollectionBookAPI.Controllers
         {
             try
             {
-                _service.DeleteBookmark(id);
+                var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                _service.DeleteBookmark(userId, id);
                 return Ok();
             }
             catch (Exception ex)
@@ -69,7 +73,8 @@ namespace CollectionBookAPI.Controllers
         {
             try
             {
-                _service.UpdateBookmark(id, bookmark);
+                var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                _service.UpdateBookmark(userId,  id, bookmark);
                 return Ok();
             }
             catch (Exception ex)

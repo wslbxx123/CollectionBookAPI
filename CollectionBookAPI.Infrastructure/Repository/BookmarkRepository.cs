@@ -1,5 +1,6 @@
 ﻿using CollectionBookAPI.Core;
 using CollectionBookAPI.Core.Settings;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -18,29 +19,36 @@ namespace CollectionBookAPI.Infrastructure.Repository
             _bookmarks = database.GetCollection<Bookmark>(settings.BookmarkCollectionName);
         }
 
-        public Bookmark AddBookmark(Bookmark bookmark)
+        public Bookmark AddBookmark(string userId, Bookmark bookmark)
         {
             bookmark.DateUpdated = DateTime.Now;
-
-            // TODO: Get the user ID after authorization.
-            bookmark.Owner = "5e97db3c6efef62c58370e5e";
+            bookmark.Owner = userId;
 
             _bookmarks.InsertOne(bookmark);
             return bookmark;
         }
 
-        public void DeleteBookmark(string id) =>
-            _bookmarks.DeleteOne(bookmark => bookmark.Id == id);
+        public void DeleteBookmark(string userId, string bookmarkId) =>
+            _bookmarks.DeleteOne(bookmark => bookmark.Id == bookmarkId && bookmark.Owner == userId);
 
-        public List<Bookmark> GetBookmarks() =>
-            _bookmarks.Find(bookmark => true)
-            .SortByDescending(bookmark => bookmark.DateUpdated).ToList();
-
-        public void UpdateBookmark(string id, Bookmark bookmark)
+        public List<Bookmark> GetBookmarks(string userId, DateTime beginTime, int num)
         {
-            bookmark.Id = id;
+            var builder = Builders<BsonDocument>.Filter;
+            var filter = Builders<Bookmark>.Filter.And(
+                Builders<Bookmark>.Filter.Eq("owner", ObjectId.Parse(userId)),
+                Builders<Bookmark>.Filter.Lt("dateUpdated", beginTime));
+
+            return _bookmarks.Find(filter)
+                .SortByDescending(bookmark => bookmark.DateUpdated)
+                .Limit(num)
+                .ToList();
+        }
+
+        public void UpdateBookmark(string userId, string bookmarkId, Bookmark bookmark)
+        {
+            bookmark.Id = bookmarkId;
             bookmark.DateUpdated = DateTime.Now;
-            _bookmarks.ReplaceOne(bookmark => bookmark.Id == id, bookmark);
+            _bookmarks.ReplaceOne(bookmark => bookmark.Id == bookmarkId && bookmark.Owner == userId, bookmark);
         }
     }
 }
