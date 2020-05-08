@@ -33,12 +33,7 @@ namespace CollectionBookAPI.Infrastructure.Repository
 
         public List<Bookmark> GetBookmarks(string userId, DateTime beginTime, int num)
         {
-            var builder = Builders<BsonDocument>.Filter;
-            var filter = Builders<Bookmark>.Filter.And(
-                Builders<Bookmark>.Filter.Eq("owner", ObjectId.Parse(userId)),
-                Builders<Bookmark>.Filter.Lt("dateUpdated", beginTime));
-
-            return _bookmarks.Find(filter)
+            return _bookmarks.Find(bookmark => bookmark.Owner == userId && bookmark.DateUpdated < beginTime)
                 .SortByDescending(bookmark => bookmark.DateUpdated)
                 .Limit(num)
                 .ToList();

@@ -27,6 +27,7 @@ namespace CollectionBookAPI.Core
         public string Description { get; set; }
 
         [BsonElement("dateUpdated")]
+        [BsonDateTimeOptions]
         public DateTime DateUpdated { get; set; }
 
         [BsonIgnore]
